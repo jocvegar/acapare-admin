@@ -1,13 +1,11 @@
 <template>
-  <v-app dark>
+  <v-app dark :style="{ background: $vuetify.theme.themes[theme].background }">
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant="miniVariant"
       :clipped="clipped"
       fixed
       app
-      color="primary"
-      dark
       absolute
     >
       <v-list shaped>
@@ -141,6 +139,11 @@ export default {
       rightDrawer: false,
       title: "Acapare"
     };
+  },
+  computed: {
+    theme() {
+      return this.$vuetify.theme.dark ? "dark" : "light";
+    }
   }
 };
 </script>
