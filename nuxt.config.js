@@ -58,7 +58,8 @@ export default {
             enablePersistence: {
               synchronizeTabs: true
             }
-          }
+          },
+          analytics: true
         }
       }
     ]

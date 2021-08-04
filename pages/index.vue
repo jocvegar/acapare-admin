@@ -5,16 +5,35 @@
         <NuxtLogo />
         <VuetifyLogo />
       </v-card>
+      <br />
       <v-card>
         <v-card-title class="headline">
           HOLIS
         </v-card-title>
         <v-card-text>
           <p>name: {{ name }}</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+            velit laboriosam minus explicabo, eaque amet consequuntur modi
+            assumenda ullam fugiat, asperiores error? Cum nesciunt eius natus,
+            praesentium vitae eligendi distinctio.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+            velit laboriosam minus explicabo, eaque amet consequuntur modi
+            assumenda ullam fugiat, asperiores error? Cum nesciunt eius natus,
+            praesentium vitae eligendi distinctio.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+            velit laboriosam minus explicabo, eaque amet consequuntur modi
+            assumenda ullam fugiat, asperiores error? Cum nesciunt eius natus,
+            praesentium vitae eligendi distinctio.
+          </p>
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire">
+          <v-btn color="primary" nuxt to="/inspire" class="my-2">
             Continue
           </v-btn>
         </v-card-actions>
@@ -24,7 +43,8 @@
 </template>
 
 <script lang="ts">
-export default {
+import Vue from "vue";
+export default Vue.extend({
   data() {
     return {
       name: ""
@@ -38,14 +58,10 @@ export default {
       const productTestRef = this.$fire.firestore
         .collection("products")
         .doc("test");
-      try {
-        const messageDoc = await productTestRef.get();
-        const data = messageDoc.data();
-        this.name = data ? data.name : "";
-      } catch (e) {
-        this.name = "";
-      }
+      const testDoc = await productTestRef.get();
+      const data = testDoc.data();
+      this.name = data ? data.name : "";
     }
   }
-};
+});
 </script>
