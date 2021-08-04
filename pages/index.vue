@@ -9,7 +9,11 @@
       </v-col>
     </v-row>
 
-    <v-row v-if="!loading" justify="center" align="center">
+    <v-row
+      v-if="!loading && data && data.imageUrls"
+      justify="center"
+      align="center"
+    >
       <v-col cols="12" sm="10" md="8">
         <v-card class="logo d-flex justify-center">
           <v-img max-height="350" :src="data.imageUrls[0]"></v-img>
@@ -76,8 +80,14 @@ export default Vue.extend({
     };
     const loading: boolean = true;
     return {
-      data,
-      loading
+      // data: {},
+      data: {} as IProduct,
+      loading,
+      attrs: {
+        class: "mb-6",
+        boilerplate: true,
+        elevation: 2
+      }
     };
   },
   mounted() {
@@ -90,7 +100,7 @@ export default Vue.extend({
         .collection("products")
         .doc("test");
       const testDoc = await productTestRef.get();
-      this.data = testDoc.data();
+      this.data = testDoc.data() as IProduct;
     }
   }
 });
