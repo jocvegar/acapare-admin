@@ -46,8 +46,9 @@
 import Vue from "vue";
 export default Vue.extend({
   data() {
+    const name: string = "";
     return {
-      name: ""
+      name
     };
   },
   mounted() {

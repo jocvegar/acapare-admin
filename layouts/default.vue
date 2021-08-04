@@ -7,28 +7,55 @@
       fixed
       app
     >
-      <v-list>
-        <v-list-item
-          v-for="(item, i) in items"
-          :key="i"
-          :to="item.to"
-          router
-          exact
-        >
-          <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
-          </v-list-item-content>
-        </v-list-item>
+      <v-list shaped>
+        <div v-for="(item, idx) in items" :key="idx">
+          <v-list-item v-if="!item.children" :to="item.to" router exact>
+            <v-list-item-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title v-text="item.title" />
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-group
+            v-if="item.children"
+            :key="item.title"
+            v-model="item.active"
+            value="true"
+            link
+          >
+            <template v-slot:activator>
+              <v-list-item-icon v-if="item.icon">
+                <v-icon>{{ item.icon }}</v-icon>
+              </v-list-item-icon>
+
+              <v-list-item-content>
+                <v-list-item-title v-text="item.title"> </v-list-item-title>
+              </v-list-item-content>
+            </template>
+
+            <v-list-item
+              v-for="(subItem, idx) in item.children"
+              :key="`children-${idx}`"
+              :to="subItem.link"
+            >
+              <v-list-item-icon>
+                <v-icon v-text="subItem.icon"></v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title v-text="subItem.title"> </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-group>
+        </div>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app>
+      <v-toolbar-title v-text="title" class="ml-5" />
       <v-btn icon @click.stop="miniVariant = !miniVariant">
         <v-icon>mdi-{{ `chevron-${miniVariant ? "right" : "left"}` }}</v-icon>
       </v-btn>
-      <v-toolbar-title v-text="title" />
       <v-spacer />
       <v-btn icon @click.stop="rightDrawer = !rightDrawer">
         <v-icon>mdi-menu</v-icon>
@@ -66,13 +93,40 @@ export default {
       items: [
         {
           icon: "mdi-apps",
-          title: "Welcome",
+          title: "Inicio",
           to: "/"
         },
         {
-          icon: "mdi-chart-bubble",
-          title: "ALGO LOCO",
-          to: "/inspire"
+          icon: "mdi-note-multiple",
+          title: "Ordenes",
+          to: "/orders"
+        },
+        {
+          icon: "mdi-basket",
+          title: "Productos",
+          to: "/products",
+          children: [
+            {
+              title: "Ver Productos",
+              link: "/products/all",
+              icon: "mdi-tshirt-crew"
+            },
+            {
+              title: "Ver Categorias",
+              link: "/products/categories",
+              icon: "mdi-view-grid"
+            }
+          ]
+        },
+        {
+          icon: "mdi-account-group",
+          title: "Clientes",
+          to: "/clients"
+        },
+        {
+          icon: "mdi-cog",
+          title: "Configuración",
+          to: "/settings"
         }
       ],
       miniVariant: false,
