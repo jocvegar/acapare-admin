@@ -6,6 +6,9 @@
       :clipped="clipped"
       fixed
       app
+      color="primary"
+      dark
+      absolute
     >
       <v-list shaped>
         <div v-for="(item, idx) in items" :key="idx">
@@ -24,6 +27,7 @@
             v-model="item.active"
             value="true"
             link
+            color="info"
           >
             <template v-slot:activator>
               <v-list-item-icon v-if="item.icon">
@@ -83,7 +87,7 @@
       </v-list>
     </v-navigation-drawer>
     <v-footer absolute app>
-      <span>&copy; {{ new Date().getFullYear() }}</span>
+      <span class="mx-auto">&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
 </template>
