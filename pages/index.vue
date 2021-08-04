@@ -33,8 +33,8 @@
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire" class="my-2">
-            Continue
+          <v-btn color="primary" nuxt to="/clients" class="my-2">
+            Clientes
           </v-btn>
         </v-card-actions>
       </v-card>
