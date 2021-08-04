@@ -52,13 +52,17 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" fixed app>
-      <v-toolbar-title v-text="title" class="ml-5" />
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
+      <v-app-bar-nav-icon
+        v-if="$vuetify.breakpoint.mobile"
+        @click.stop="drawer = !drawer"
+      ></v-app-bar-nav-icon>
+      <v-btn v-else icon @click.stop="miniVariant = !miniVariant">
         <v-icon>mdi-{{ `chevron-${miniVariant ? "right" : "left"}` }}</v-icon>
       </v-btn>
+      <v-toolbar-title v-text="title" class="ml-1" />
       <v-spacer />
       <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>mdi-menu</v-icon>
+        <v-icon>mdi-dots-vertical</v-icon>
       </v-btn>
     </v-app-bar>
     <v-main>
